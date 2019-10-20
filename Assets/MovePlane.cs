@@ -4,7 +4,7 @@ using UnityEngine;
 
 public class MovePlane : MonoBehaviour
 {
-    Vector2 DeltaPos, lastmouseposition;
+    Vector3 DeltaPos, lastmouseposition;
     [SerializeField] float Magnitude=1;
 
     private void Start()
@@ -14,20 +14,21 @@ public class MovePlane : MonoBehaviour
 
     private void Update()
     {
-        DeltaPos = Vector2.zero;
+        DeltaPos = Vector3.zero;
+        Debug.Log(Input.mousePosition);
         if (Input.GetMouseButton(0))
         {
-            Vector2 currentMousepos = Input.mousePosition;
-            if (lastmouseposition == Vector2.zero) lastmouseposition = currentMousepos;
+            Vector3 currentMousepos = Input.mousePosition;
+            if (lastmouseposition == Vector3.zero) lastmouseposition = currentMousepos;
 
             DeltaPos = currentMousepos - lastmouseposition;//Debug.Log(DeltaPos);
             lastmouseposition = currentMousepos;
-            DeltaPos.y = 0;
+            //DeltaPos.y = 0;
 
-            if (currentMousepos.x > lastmouseposition.x) transform.position -= new Vector3(DeltaPos.x,DeltaPos.y,0)*Magnitude;
-            else transform.position += new Vector3(DeltaPos.x, DeltaPos.y, 0)*Magnitude;
+            if (currentMousepos.x > lastmouseposition.x) transform.position -= new Vector3(DeltaPos.x,0,DeltaPos.y)*Magnitude;
+            else transform.position += new Vector3(DeltaPos.x, 0, DeltaPos.y)*Magnitude;
 
-            Debug.Log(transform.position);
+            //Debug.Log(transform.position);
 
         }
         else {
