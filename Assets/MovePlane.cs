@@ -15,7 +15,7 @@ public class MovePlane : MonoBehaviour
     private void Update()
     {
         DeltaPos = Vector3.zero;
-        Debug.Log(Input.mousePosition);
+//        Debug.Log(Input.mousePosition);
         if (Input.GetMouseButton(0))
         {
             Vector3 currentMousepos = Input.mousePosition;
@@ -36,18 +36,18 @@ public class MovePlane : MonoBehaviour
         }
     }
 
-    private void LateUpdate()
-    {
-        Vector3 pos = transform.position;
+    //private void LateUpdate()
+    //{
+    //    Vector3 pos = transform.position;
 
-        if (transform.position.x < -5)
-        {
-            pos.x = -5;
-        }else if (transform.position.x > 5)
-        {
-            pos.x = 5;
-        }
+    //    if (transform.position.x < -5)
+    //    {
+    //        pos.x = -5;
+    //    }else if (transform.position.x > 5)
+    //    {
+    //        pos.x = 5;
+    //    }
 
-        transform.position = pos;
-    }
+    //    transform.position = pos;
+    //}
 }
