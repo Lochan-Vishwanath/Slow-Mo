@@ -4,4 +4,4 @@
 
 ![](https://i.ibb.co/LnFrLdr/Screenshot-2019-12-22-at-12-20-48-PM.png)
 
-![](https://i.ibb.co/RjHgyLT/Screenshot-2019-12-22-at-12-20-05-PM.png)
+![](https://i.ibb.co/YjbmnMy/Screenshot-2019-12-22-at-12-20-05-PM.png)
