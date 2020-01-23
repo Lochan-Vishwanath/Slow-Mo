@@ -9,6 +9,7 @@ public class MoveObj : MonoBehaviour
     float mzcord;
     bool beingTouched = false;
     Vector3 originalPos;
+
     //1440X720-18:9 Y(mouse/touch)->Z(Transform) X(mouse/touch)->X(Transform)
 
     private void OnMouseDown()
@@ -41,10 +42,14 @@ public class MoveObj : MonoBehaviour
     }
     private void OnCollisionEnter(Collision collision)
     {
-        
+        Debug.Log("Inside Collision");
         if (collision.gameObject.tag=="Cube") {
-            if(!beingTouched)
+            if (!beingTouched)
+            {
                 gameObject.GetComponent<MeshRenderer>().material.color = collision.gameObject.GetComponent<Renderer>().material.color;
+                pphandler.starteffect = true;
+
+            }
             beingTouched = false;
         }
     }
