@@ -8,7 +8,11 @@ public class MoveObj : MonoBehaviour
     Vector3 mOffset;
     float mzcord;
     bool beingTouched = false;
+    bool StopMovement = false;
     Vector3 originalPos;
+    public bool ColorMatched;
+    public Color finalColor;
+    MeshRenderer Renderer;
 
     //1440X720-18:9 Y(mouse/touch)->Z(Transform) X(mouse/touch)->X(Transform)
 
@@ -17,6 +21,7 @@ public class MoveObj : MonoBehaviour
         mzcord = Camera.main.WorldToScreenPoint(transform.position).z;
         mOffset = transform.position - GetmouseworldPos();
         beingTouched = true;
+        StopMovement = false;
     }
 
     private Vector3 GetmouseworldPos()
@@ -28,7 +33,7 @@ public class MoveObj : MonoBehaviour
 
     private void OnMouseDrag()
     {
-        if (beingTouched)
+        if (beingTouched && !StopMovement)
         {
             Vector3 moveposGlobal = GetmouseworldPos() + mOffset;
             transform.localPosition = new Vector3(moveposGlobal.x, 1f, moveposGlobal.y);
@@ -38,30 +43,48 @@ public class MoveObj : MonoBehaviour
     private void OnMouseUp()
     {
         beingTouched = false;
-        Debug.Log("hre");
+        StopMovement = true;
     }
     private void OnCollisionEnter(Collision collision)
     {
-        Debug.Log("Inside Collision");
+        StopMovement = true;
         if (collision.gameObject.tag=="Cube") {
             if (!beingTouched)
             {
-                gameObject.GetComponent<MeshRenderer>().material.color = collision.gameObject.GetComponent<Renderer>().material.color;
+                Renderer.material.color = collision.gameObject.GetComponent<Renderer>().material.color;
                 pphandler.starteffect = true;
-
+                Master.checknow=true;
+                if (Renderer.material.color.Equals(finalColor))
+                {
+                    ColorMatched = true;
+                }
+                else
+                {
+                    ColorMatched = false;
+                }
             }
             beingTouched = false;
+        }
+        if (collision.gameObject.tag == "Cube2")
+        {
+            if (!beingTouched)
+            {
+                Renderer.material.color = collision.gameObject.GetComponent<Renderer>().material.color;
+                Master.checknow = true;
+                pphandler.starteffect = true;
+            }
         }
     }
     private void Start()
     {
         originalPos = transform.position;
+        Renderer = GetComponent<MeshRenderer>();
     }
     private void Update()
     {
         if (!beingTouched)
         {
-            transform.position = Vector3.Lerp(transform.position,originalPos,0.05f);
+            transform.position = Vector3.Lerp(transform.position,originalPos,0.1f);
         }
     }
 }
