@@ -14,8 +14,8 @@ public class Master : MonoBehaviour
     {
         Moveable = GameObject.FindGameObjectsWithTag("Cube");
         Totalnoofobjs = Moveable.Length;
+        Debug.Log(Totalnoofobjs);
         Application.targetFrameRate = 60;
-        Debug.Log(Application.targetFrameRate);
     }
 
     void Update()
@@ -27,12 +27,16 @@ public class Master : MonoBehaviour
                 if (a.GetComponent<MoveObj>().ColorMatched)
                 {
                     count++;
+                    Debug.Log(count);
                 }
             }
             if (count == Moveable.Length)
             {
                 //NEXT LEVEL
                 Debug.Log("NEXT LEVEL");
+            }
+            else {
+                count = 0;
             }
             checknow = false;
         }

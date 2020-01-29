@@ -12,6 +12,7 @@ public class MoveObj : MonoBehaviour
     Vector3 originalPos;
     public bool ColorMatched;
     public Color finalColor;
+    public Color InitialColor;
     MeshRenderer Renderer;
 
     //1440X720-18:9 Y(mouse/touch)->Z(Transform) X(mouse/touch)->X(Transform)
@@ -79,6 +80,20 @@ public class MoveObj : MonoBehaviour
     {
         originalPos = transform.position;
         Renderer = GetComponent<MeshRenderer>();
+        Renderer.material.color = InitialColor;
+        Debug.Log(Renderer.material.color.ToString());
+        Debug.Log(finalColor.ToString());
+
+        if (string.Equals (Renderer.material.color.ToString(),finalColor.ToString()))
+       {
+            Debug.Log("here");
+            ColorMatched = true;
+        }
+       else
+       {
+            Debug.Log("here2");
+            ColorMatched = false;
+        }
     }
     private void Update()
     {
